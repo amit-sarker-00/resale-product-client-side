@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaRProject } from "react-icons/fa";
 import "./Navbar.css";
+import PrimaryButton from "../../components/PrimaryButton";
 const Navbar = () => {
   const menuBar = (
     <>
@@ -73,11 +74,8 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">{menuBar}</ul>
         </div>
         <div className="navbar-end pr-5">
-          <Link
-            to="/login"
-            className=" text-white font-bold hover:bg-violet-900 p-2 bg-pink-500 border-none rounded-xl"
-          >
-            Login
+          <Link to="/login" className="">
+            <PrimaryButton>Login</PrimaryButton>
           </Link>
         </div>
       </div>
