@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 const Login = () => {
+  useTitle("Login");
   const { login, googleSignIn } = useContext(AuthContext);
   const {
     register,

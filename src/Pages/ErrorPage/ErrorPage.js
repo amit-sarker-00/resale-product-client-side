@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton";
+import useTitle from "../../Hooks/useTitle";
 
 const ErrorPage = () => {
+  useTitle("ErrorPage");
   return (
     <section className="flex items-center h-full p-16 dark:text-gray-100">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
