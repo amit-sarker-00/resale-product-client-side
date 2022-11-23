@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaRProject } from "react-icons/fa";
 import "./Navbar.css";
 import PrimaryButton from "../../components/PrimaryButton";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const menuBar = (
     <>
       <li>
@@ -31,6 +33,11 @@ const Navbar = () => {
       </li>
     </>
   );
+  const handelSignOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="  w-full navbar">
@@ -74,9 +81,15 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">{menuBar}</ul>
         </div>
         <div className="navbar-end pr-5">
-          <Link to="/login" className="">
-            <PrimaryButton>Login</PrimaryButton>
-          </Link>
+          {user?.email ? (
+            <Link to="/login" onClick={handelSignOut}>
+              <PrimaryButton>Logout</PrimaryButton>
+            </Link>
+          ) : (
+            <Link to="/login" className="">
+              <PrimaryButton>Login</PrimaryButton>
+            </Link>
+          )}
         </div>
       </div>
     </div>

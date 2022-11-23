@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, googleSignIn } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -15,6 +15,11 @@ const Login = () => {
       .then(() => {
         reset();
       })
+      .catch((error) => console.log(error));
+  };
+  const handelGoogleSignIn = () => {
+    googleSignIn()
+      .then(() => {})
       .catch((error) => console.log(error));
   };
   return (
@@ -55,7 +60,10 @@ const Login = () => {
           </p>
         </form>
         <div className="divider">OR</div>
-        <button className="btn rounded-md p-2 w-80  bg-pink-500 text-black font-bold hover:bg-pink-400">
+        <button
+          onClick={handelGoogleSignIn}
+          className="btn rounded-md p-2 w-80  bg-pink-500 text-black font-bold hover:bg-pink-400"
+        >
           Sign in With Google
         </button>
       </div>
