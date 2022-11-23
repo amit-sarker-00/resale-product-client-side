@@ -1,0 +1,11 @@
+.navbar {
+  padding: 0;
+  position: sticky;
+  top: 0px;
+  z-index: 5;
+  font-weight: bold;
+}
+.navbar li:hover {
+  background-color: pink;
+  border-radius: 5px;
+}
