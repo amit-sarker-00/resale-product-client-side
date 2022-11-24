@@ -23,8 +23,8 @@ const SignUp = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
-  const savedUser = (name, email, role) => {
-    const user = { name, email, role };
+  const savedUser = (name, email, role, image) => {
+    const user = { name, email, role, image };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -65,11 +65,11 @@ const SignUp = () => {
             <option>seller</option>
             <option>user</option>
           </select>
-          {/* <input
+          <input
             className="border border-gray-400 p-2 w-80"
-            {...register("role", { required: "role is Required" })}
-            placeholder="type a role"
-          /> */}
+            {...register("image", { required: "image is Required" })}
+            placeholder="image"
+          />
           <input
             className="border border-gray-400 p-2 w-80 "
             {...register("phone", { required: "Number is Required" })}

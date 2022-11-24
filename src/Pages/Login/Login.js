@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   useTitle("Login");
   const { login, googleSignIn } = useContext(AuthContext);
   const {
@@ -18,7 +21,7 @@ const Login = () => {
     login(data.email, data.password)
       .then(() => {
         toast.success("Login Successfully");
-        navigate("/");
+        navigate(from, { replace: true });
 
         reset();
       })
