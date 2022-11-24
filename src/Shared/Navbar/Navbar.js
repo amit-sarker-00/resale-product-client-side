@@ -17,20 +17,6 @@ const Navbar = () => {
       <li>
         <Link to="/myorders">ORDERS</Link>
       </li>
-      <li className="" tabIndex={0}>
-        <Link>CATEGORIES</Link>
-        <ul className="p-2 bg-white   text-black font-bold">
-          <li className=" hover:text-white">
-            <Link>ELECTRIC BIKES</Link>
-          </li>
-          <li className=" hover:text-white">
-            <Link>LUXURY BIKES</Link>
-          </li>
-          <li className=" hover:text-white">
-            <Link>TOP OLD BIKES</Link>
-          </li>
-        </ul>
-      </li>
     </>
   );
   const handelSignOut = () => {

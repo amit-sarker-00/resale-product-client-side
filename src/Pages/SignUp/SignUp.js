@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
 const SignUp = () => {
   useTitle("SignUp");
   const { createUser, googleSignIn } = useContext(AuthContext);
+  const [user, SetUSer] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const handelSignUp = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
+        savedUser(data.name, data.email, data.role);
+        toast.success("User Create Successfully");
         reset();
       })
       .catch((error) => console.log(error));
@@ -21,6 +22,20 @@ const SignUp = () => {
     googleSignIn()
       .then(() => {})
       .catch((error) => console.log(error));
+  };
+  const savedUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        SetUSer(email);
+      });
   };
   return (
     <div className=" text-center">
@@ -42,6 +57,19 @@ const SignUp = () => {
             {...register("email", { required: "Email is Required" })}
             placeholder="email"
           />
+          <select
+            {...register("role", { required: "role is Required" })}
+            placeholder="role"
+            className="border border-gray-400 p-2 w-80"
+          >
+            <option>seller</option>
+            <option>user</option>
+          </select>
+          {/* <input
+            className="border border-gray-400 p-2 w-80"
+            {...register("role", { required: "role is Required" })}
+            placeholder="type a role"
+          /> */}
           <input
             className="border border-gray-400 p-2 w-80 "
             {...register("phone", { required: "Number is Required" })}
