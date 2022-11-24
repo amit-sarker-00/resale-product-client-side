@@ -52,7 +52,7 @@ const LatestSell = () => {
               <div className="card-body">
                 <h2 className="card-title">{latest.name}</h2>
                 <p>
-                  <strong>Price: ${latest.price}</strong>
+                  <strong>Resale Price: ${latest.price}</strong>
                 </p>
               </div>
             </div>
