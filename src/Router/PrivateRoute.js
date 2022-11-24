@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { RingLoader } from "react-spinners";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loader } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  if (loader) {
+  if (loading) {
     return (
       <div style={{ marginLeft: "45%" }}>
-        <BeatLoader
-          strokeColor="black"
+        <RingLoader
+          color="#36d7b7"
           strokeWidth="5"
-          animationDuration="0.75"
-          width="96"
-          visible={true}
+          speedMultiplier="3"
+          loading="true"
+          size="80"
         />
       </div>
     );
