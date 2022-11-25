@@ -1,10 +1,12 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
+import Addproduct from "../Pages/AddProduct/Addproduct";
 import Blogs from "../Pages/Blogs/Blogs";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import MyProduct from "../Pages/MyProduct/MyProduct";
 import ShowAll from "../Pages/ShowAll/ShowAll";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
@@ -33,6 +35,14 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/addproduct",
+        element: <Addproduct></Addproduct>,
+      },
+      {
+        path: "/myproduct",
+        element: <MyProduct></MyProduct>,
       },
       {
         path: "/showall/:id",

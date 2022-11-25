@@ -4,8 +4,16 @@ import { FaRProject } from "react-icons/fa";
 import "./Navbar.css";
 import PrimaryButton from "../../components/PrimaryButton";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const { data: storUser = [], isLoading } = useQuery({
+    queryKey: ["storUser"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/users/${storUser?.email}`)
+        .then((res) => res.json())
+        .catch((err) => console.error(err)),
+  });
   const menuBar = (
     <>
       <li>
@@ -15,8 +23,24 @@ const Navbar = () => {
         <Link to="/blogs">BLOGS</Link>
       </li>
       <li>
-        <Link to="/myorders">ORDERS</Link>
+        <Link to="/dashboard">DASHBOARD</Link>
       </li>
+      <div>
+        {user?.email === storUser?.email && storUser.role === "seller" ? (
+          <div className="sm:flex sm:items-center">
+            <li>
+              <Link to="/addproduct">ADD PRODUCT</Link>
+            </li>
+            <li>
+              <Link to="/myproduct">MY PRODUCT</Link>
+            </li>
+          </div>
+        ) : (
+          <li>
+            <Link to="/myorder">MY ORDER</Link>
+          </li>
+        )}
+      </div>
     </>
   );
   const handelSignOut = () => {

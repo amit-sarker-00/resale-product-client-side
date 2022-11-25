@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import PrimaryButton from "../../components/PrimaryButton";
 
 const ShowAll = () => {
   const [datas, setDatas] = useState([]);
@@ -35,24 +36,20 @@ const ShowAll = () => {
               <h2 className="card-title">{data.categoryName}</h2>
 
               <div className="flex item-center justify-between">
-                <h2 className=" font-bold">seller :{data.sellerName}</h2>
-                <h2 className="font-bold"> postDate :{data.date}</h2>
+                <h2 className=" font-semibold">seller :{data.sellerName}</h2>
+                <h2 className="font-semibold"> postDate :{data.date}</h2>
               </div>
-              <h2 className="font-bold">Used :{data.used} year</h2>
+              <h2 className="font-semibold">Used :{data.used} year</h2>
               <div className="flex items-center justify-between">
-                <p>
-                  <strong>Original :${data.original}</strong>
-                </p>
-                <p>
-                  <strong>Resale :${data.resale}</strong>
-                </p>
+                <p className="font-semibold">Original :${data.original}</p>
+                <p className="font-semibold">Resale :${data.resale}</p>
               </div>
             </div>
-            {/* <div className="mx-auto mb-2">
-          <PrimaryButton>
-            <Link to={`/showall/${category._id}`}>View All</Link>
-          </PrimaryButton>
-        </div> */}
+            <div className="mx-auto mb-2">
+              <Link>
+                <PrimaryButton>Book Now</PrimaryButton>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

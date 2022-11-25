@@ -62,8 +62,8 @@ const SignUp = () => {
             placeholder="role"
             className="border border-gray-400 p-2 w-80"
           >
-            <option>seller</option>
             <option>user</option>
+            <option>seller</option>
           </select>
           <input
             className="border border-gray-400 p-2 w-80"

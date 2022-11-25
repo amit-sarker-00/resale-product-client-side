@@ -41,7 +41,7 @@ const LatestSell = () => {
       >
         {latestSell?.map((latest) => (
           <SplideSlide key={latest._id}>
-            <div className="card w-full sm:w-80  bg-base-100 shadow-xl border">
+            <div className="card w-full sm:w-80 mx-auto  bg-base-100 shadow-xl border">
               <figure className="px-4 pt-4">
                 <img
                   src={latest.image}

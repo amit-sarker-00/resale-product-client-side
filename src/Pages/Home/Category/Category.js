@@ -31,7 +31,7 @@ const Category = () => {
                 className="rounded-xl w-full h-64"
               />
             </figure>
-            <div className="card-body">
+            <div className="card-body mx-auto">
               <h2 className="card-title">{category.categoryName}</h2>
             </div>
             <div className="mx-auto mb-2">
