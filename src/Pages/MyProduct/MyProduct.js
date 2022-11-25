@@ -1,25 +1,101 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { RingLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
-  const { data: products = [], isLoading } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["product"],
     queryFn: () =>
       fetch(`http://localhost:5000/product/${user?.email}`)
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
-  console.log(products);
+  if (isLoading) {
+    return (
+      <div style={{ marginLeft: "45%" }}>
+        <RingLoader
+          color="#36d7b7"
+          strokeWidth="5"
+          speedMultiplier="3"
+          loading="true"
+          size="80"
+        />
+      </div>
+    );
+  }
+  const handelDelete = (id) => {
+    fetch(`http://localhost:5000/product/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Deleted successfully");
+        }
+        refetch();
+      });
+  };
   return (
     <div>
-      {products?.map((product) => (
-        <div
-          key={product._id}
-          className="card w-full sm:w-80  bg-base-100 shadow-xl border mx-auto"
-        ></div>
-      ))}
+      <div className="overflow-x-auto w-full my-10">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th>Total</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Boost</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products?.map((product, i) => (
+              <tr key={product._id}>
+                <th>
+                  <label>{i + 1}</label>
+                </th>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={product.image}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{product.productName}</div>
+                      <div className="text-sm opacity-50">
+                        {product.location}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>${product.price}</td>
+                <td>
+                  <button className="btn btn-xs btn-warning">Advertise</button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handelDelete(product._id)}
+                    className="btn btn-xs btn-info"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

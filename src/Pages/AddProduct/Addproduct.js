@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Addproduct = () => {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const imageHostKey = process.env.REACT_APP_imgbb_key;
@@ -38,10 +40,10 @@ const Addproduct = () => {
             body: JSON.stringify(product),
           })
             .then((res) => res.json())
-            .then(() => {
-              reset();
+            .then((data) => {
               toast.success("Product added successfully");
               navigate("/myproduct");
+              reset();
             });
         }
       });
