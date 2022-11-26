@@ -1,13 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
+import useToken from "../../Hooks/useToken";
 const SignUp = () => {
   useTitle("SignUp");
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
+  const navigate = useNavigate();
+
+  if (token) {
+    navigate("/");
+  }
   const { createUser, googleSignIn } = useContext(AuthContext);
-  const [user, SetUSer] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const handelSignUp = (data) => {
     createUser(data.email, data.password)
@@ -23,8 +30,8 @@ const SignUp = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
-  const savedUser = (name, email, role, image) => {
-    const user = { name, email, role, image };
+  const savedUser = (name, email, role) => {
+    const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -34,9 +41,10 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        SetUSer(email);
+        setCreatedUserEmail(email);
       });
   };
+
   return (
     <div className=" text-center">
       <h1 className="text-3xl lg:text-5xl font-bold text-pink-500 my-10 font-mono">
@@ -65,11 +73,7 @@ const SignUp = () => {
             <option>user</option>
             <option>seller</option>
           </select>
-          <input
-            className="border border-gray-400 p-2 w-80"
-            {...register("image", { required: "image is Required" })}
-            placeholder="image"
-          />
+
           <input
             className="border border-gray-400 p-2 w-80 "
             {...register("phone", { required: "Number is Required" })}

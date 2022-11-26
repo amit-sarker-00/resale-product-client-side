@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRProject } from "react-icons/fa";
 import "./Navbar.css";
 import PrimaryButton from "../../components/PrimaryButton";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 const Navbar = () => {
+  const [storeUser, setStoreUser] = useState({});
   const { user, logOut } = useContext(AuthContext);
-  const { data: storUser = [], isLoading } = useQuery({
-    queryKey: ["storUser"],
-    queryFn: () =>
-      fetch(`http://localhost:5000/users/${storUser?.email}`)
-        .then((res) => res.json())
-        .catch((err) => console.error(err)),
-  });
+  useEffect(() => {
+    axios.get(`http://localhost:5000/users/${user?.email}`).then((res) => {
+      setStoreUser(res.data);
+    });
+  }, [user?.email]);
   const menuBar = (
     <>
       <li>
@@ -26,7 +25,8 @@ const Navbar = () => {
         <Link to="/dashboard">DASHBOARD</Link>
       </li>
       <div>
-        {user?.email === storUser?.email && storUser.role === "seller" ? (
+        {(user?.email === storeUser?.email && storeUser.role === "seller") ||
+        storeUser.role === "admin" ? (
           <div className="sm:flex sm:items-center">
             <li>
               <Link to="/addproduct">ADD PRODUCT</Link>

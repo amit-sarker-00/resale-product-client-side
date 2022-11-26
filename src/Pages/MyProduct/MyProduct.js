@@ -25,7 +25,7 @@ const MyProduct = () => {
           strokeWidth="5"
           speedMultiplier="3"
           loading="true"
-          size="80"
+          size="80px"
         />
       </div>
     );

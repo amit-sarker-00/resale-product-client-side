@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import PrimaryButton from "../../components/PrimaryButton";
+import { useLoaderData } from "react-router-dom";
+import BookingModal from "../../components/BookingModal/BookingModal";
+import useTitle from "../../Hooks/useTitle";
 
 const ShowAll = () => {
+  useTitle("category");
+  const [modalData, setModalData] = useState({});
   const [datas, setDatas] = useState([]);
   const category = useLoaderData();
   const { categoryName } = category;
@@ -45,14 +48,20 @@ const ShowAll = () => {
                 <p className="font-semibold">Resale :${data.resale}</p>
               </div>
             </div>
+            {/* modal for book now */}
             <div className="mx-auto mb-2">
-              <Link>
-                <PrimaryButton>Book Now</PrimaryButton>
-              </Link>
+              <label
+                onClick={() => setModalData(data)}
+                htmlFor="book-now"
+                className="btn  bg-gradient-to-r from-pink-500 to-pink-400 text-black rounded-md"
+              >
+                Book Now
+              </label>
             </div>
           </div>
         ))}
       </div>
+      <BookingModal modalData={modalData}></BookingModal>
     </div>
   );
 };
