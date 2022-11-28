@@ -1,13 +1,44 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const BookingModal = ({ modalData }) => {
-  const { categoryName, resale } = modalData;
-
-  const { register, handleSubmit } = useForm();
+  const { categoryName, resale, image } = modalData;
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handelBookProduct = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const categoryName = form.name.value;
+    const resale = form.resale.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const location = form.location.value;
+    const image = form.image.value;
 
+    const productInfo = {
+      resale,
+      categoryName,
+      email,
+      phone,
+      location,
+      image,
+    };
+    fetch("http://localhost:5000/booknow", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(productInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("booking successfully done!");
+        navigate("/dashboard/myorders");
+      });
+  };
   return (
     <div>
       <input type="checkbox" id="book-now" className="modal-toggle" />
@@ -21,43 +52,44 @@ const BookingModal = ({ modalData }) => {
           </label>
           <form
             className=" flex flex-col gap-4 items-center justify-center "
-            onSubmit={handleSubmit()}
+            onSubmit={handelBookProduct}
           >
             <input
               defaultValue={categoryName}
               disabled
               className="border border-gray-400 p-2 w-80"
-              {...register("productName", {
-                required: "productName is Required",
-              })}
+              name="name"
               placeholder="productName"
             />
             <input
               defaultValue={user?.email}
               disabled
               className="border border-gray-400 p-2 w-80"
-              {...register("email", {
-                required: "email is Required",
-              })}
+              name="email"
               placeholder="email"
+            />
+            <input
+              defaultValue={image}
+              disabled
+              className="border border-gray-400 p-2 w-80"
+              name="image"
+              placeholder="image"
             />
             <input
               defaultValue={resale}
               disabled
               className="border border-gray-400 p-2 w-80"
-              {...register("price", { required: "price is Required" })}
+              name="resale"
               placeholder="resale price"
             />
             <input
               className="border border-gray-400 p-2 w-80 "
-              {...register("phone", { required: "Number is Required" })}
               placeholder="phone number"
+              name="phone"
             />
 
             <select
-              {...register("location", {
-                required: "location is Required",
-              })}
+              name="location"
               placeholder="location"
               className="border border-gray-400 p-2 w-80"
             >

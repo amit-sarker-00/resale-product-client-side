@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import useTitle from "../../../Hooks/useTitle";
 
-const AllUser = () => {
+const AllBuyers = () => {
   useTitle("allUser");
   const { user } = useContext(AuthContext);
   const { data: allUsers = [], refetch } = useQuery({
@@ -31,7 +31,7 @@ const AllUser = () => {
       });
   };
   return (
-    <div>
+    <div className="shadow-lg border my-10">
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -71,4 +71,4 @@ const AllUser = () => {
   );
 };
 
-export default AllUser;
+export default AllBuyers;

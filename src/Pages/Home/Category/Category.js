@@ -1,10 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import PrimaryButton from "../../../components/PrimaryButton";
 const Category = () => {
-  const { data: categories = [], isLoading } = useQuery({
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  const { data: categories = [] } = useQuery({
     queryKey: ["category"],
     queryFn: () =>
       fetch("http://localhost:5000/categories")
@@ -18,7 +22,12 @@ const Category = () => {
           Categories
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+      <div
+        data-aos="fade-up"
+        data-aos-offset="300"
+        data-aos-duration="700"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 "
+      >
         {categories?.map((category) => (
           <div
             key={category._id}

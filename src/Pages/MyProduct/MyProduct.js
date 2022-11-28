@@ -1,23 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { RingLoader } from "react-spinners";
 import toast from "react-hot-toast";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import useTitle from "../../Hooks/useTitle";
 const MyProduct = () => {
-  const { user } = useContext(AuthContext);
-  const {
-    data: products = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  useTitle("my-product");
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  const { user, loading } = useContext(AuthContext);
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["product"],
     queryFn: () =>
       fetch(`http://localhost:5000/product/${user?.email}`)
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
-  if (isLoading) {
+  if (loading) {
     return (
       <div style={{ marginLeft: "45%" }}>
         <RingLoader
@@ -42,9 +44,14 @@ const MyProduct = () => {
         refetch();
       });
   };
+
   return (
     <div>
-      <div className="overflow-x-auto w-full my-10">
+      <div
+        data-aos="fade-left"
+        data-aos-offset="300"
+        className="overflow-x-auto w-full my-10 shadow-md border"
+      >
         <table className="table w-full">
           <thead>
             <tr>

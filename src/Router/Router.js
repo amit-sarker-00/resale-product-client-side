@@ -6,7 +6,6 @@ import Main from "../layout/Main";
 import Addproduct from "../Pages/AddProduct/Addproduct";
 import Blogs from "../Pages/Blogs/Blogs";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
-import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 import MyOrder from "../Pages/Dashboard/MyOrder/MyOrder";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
@@ -15,11 +14,16 @@ import MyProduct from "../Pages/MyProduct/MyProduct";
 import ShowAll from "../Pages/ShowAll/ShowAll";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
+import AdminRoute from "./AdminRoute";
+import Payment from "../Pages/Payment/Payment";
+import DisplayError from "../Shared/DisplayError/DisplayError";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
       {
         path: "/",
@@ -52,8 +56,6 @@ export const router = createBrowserRouter([
       {
         path: "/bookingmodal",
         element: <BookingModal></BookingModal>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
       },
 
       {
@@ -70,15 +72,33 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
+    errorElement: <DisplayError></DisplayError>,
     element: (
       <PrivateRoute>
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
     children: [
-      { path: "/dashboard/alluser", element: <AllUser></AllUser> },
-      { path: "/dashboard/allseller", element: <AllSeller></AllSeller> },
+      {
+        path: "/dashboard/allbuyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allseller",
+        element: <AllSeller></AllSeller>,
+        loader: () => fetch("http://localhost:5000/sellers"),
+      },
       { path: "/dashboard/myorders", element: <MyOrder></MyOrder> },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/orders/${params.id}`),
+      },
     ],
   },
   { path: "*", element: <ErrorPage></ErrorPage> },

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const LatestSell = () => {
-  const { data: latestSell = [], isLoading } = useQuery({
+  const { data: latestSell = [] } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
       fetch("http://localhost:5000/latestSell")

@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import BookingModal from "../../components/BookingModal/BookingModal";
 import useTitle from "../../Hooks/useTitle";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const ShowAll = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   useTitle("category");
   const [modalData, setModalData] = useState({});
   const [datas, setDatas] = useState([]);
@@ -17,12 +21,19 @@ const ShowAll = () => {
         setDatas(data);
       });
   }, [categoryName]);
+
   return (
     <div>
       <div className="text-center my-10 text-xl md:text-3xl font-bold">
         <h1>Show all of {categoryName} </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-10">
+      <div
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+        data-aos-duration="1000"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-10"
+      >
         {datas.map((data) => (
           <div
             key={data._id}
