@@ -32,7 +32,7 @@ const Addproduct = () => {
             location: data.location,
             phone: data.phone,
           };
-          fetch("http://localhost:5000/addproduct", {
+          fetch("https://resale-server-side.vercel.app/addproduct", {
             method: "POST",
             headers: {
               "content-type": "application/json",

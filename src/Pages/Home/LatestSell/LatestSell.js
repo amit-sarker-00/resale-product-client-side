@@ -6,7 +6,7 @@ const LatestSell = () => {
   const { data: latestSell = [] } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
-      fetch("http://localhost:5000/latestSell")
+      fetch("https://resale-server-side.vercel.app/latestSell")
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });

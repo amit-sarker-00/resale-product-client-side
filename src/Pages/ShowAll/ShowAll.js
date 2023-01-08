@@ -15,7 +15,7 @@ const ShowAll = () => {
   const { categoryName } = category;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/storeBikes/${categoryName}`)
+    fetch(`https://resale-server-side.vercel.app/storeBikes/${categoryName}`)
       .then((res) => res.json())
       .then((data) => {
         setDatas(data);

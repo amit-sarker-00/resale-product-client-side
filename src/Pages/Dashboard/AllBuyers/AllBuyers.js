@@ -10,16 +10,19 @@ const AllBuyers = () => {
   const { data: allUsers = [], refetch } = useQuery({
     queryKey: ["allUser"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users?email=${user?.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://resale-server-side.vercel.app/users?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
   const handelMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://resale-server-side.vercel.app/users/admin/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

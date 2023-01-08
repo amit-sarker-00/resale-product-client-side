@@ -25,7 +25,7 @@ const BookingModal = ({ modalData }) => {
       location,
       image,
     };
-    fetch("http://localhost:5000/booknow", {
+    fetch("https://resale-server-side.vercel.app/booknow", {
       method: "POST",
       headers: {
         "content-type": "application/json",

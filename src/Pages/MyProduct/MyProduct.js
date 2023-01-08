@@ -15,7 +15,7 @@ const MyProduct = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ["product"],
     queryFn: () =>
-      fetch(`http://localhost:5000/product/${user?.email}`)
+      fetch(`https://resale-server-side.vercel.app/product/${user?.email}`)
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
@@ -33,7 +33,7 @@ const MyProduct = () => {
     );
   }
   const handelDelete = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://resale-server-side.vercel.app/product/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

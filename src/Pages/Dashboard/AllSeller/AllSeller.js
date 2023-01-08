@@ -13,7 +13,7 @@ const AllSeller = () => {
   const { data: seller = [] } = useQuery({
     queryKey: ["seller"],
     queryFn: () =>
-      fetch("http://localhost:5000/seller")
+      fetch("https://resale-server-side.vercel.app/seller")
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });

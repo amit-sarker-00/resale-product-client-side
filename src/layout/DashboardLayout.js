@@ -11,9 +11,11 @@ const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   useEffect(() => {
-    axios.get(`http://localhost:5000/users/${user?.email}`).then((res) => {
-      setStoreUser(res.data);
-    });
+    axios
+      .get(`https://resale-server-side.vercel.app/users/${user?.email}`)
+      .then((res) => {
+        setStoreUser(res.data);
+      });
   }, [user?.email]);
   return (
     <div>

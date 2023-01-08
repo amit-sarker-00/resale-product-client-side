@@ -9,9 +9,11 @@ const Navbar = () => {
   const [storeUser, setStoreUser] = useState({});
   const { user, logOut } = useContext(AuthContext);
   useEffect(() => {
-    axios.get(`http://localhost:5000/users/${user?.email}`).then((res) => {
-      setStoreUser(res.data);
-    });
+    axios
+      .get(`https://resale-server-side.vercel.app/users/${user?.email}`)
+      .then((res) => {
+        setStoreUser(res.data);
+      });
   }, [user?.email]);
   const menuBar = (
     <>

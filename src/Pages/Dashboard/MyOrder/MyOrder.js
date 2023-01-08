@@ -11,7 +11,7 @@ const MyOrder = () => {
   const { data: orders = [] } = useQuery({
     queryKey: ["order"],
     queryFn: () =>
-      fetch(`http://localhost:5000/myorders/${user?.email}`)
+      fetch(`https://resale-server-side.vercel.app/myorders/${user?.email}`)
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
