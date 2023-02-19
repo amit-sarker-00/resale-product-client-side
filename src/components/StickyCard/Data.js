@@ -4,6 +4,7 @@ import lottie3 from "../Lottie/reading-newspaper.json";
 import lottie4 from "../Lottie/website-design.json";
 import lottie5 from "../Lottie/lottie2.json";
 
+// above all imports are images
 // added
 export const cardsData = [
   {
@@ -16,8 +17,7 @@ export const cardsData = [
     id: 2,
     title: "Do you offer international shipping?",
     body: "Yes, we offer international shipping to select countries. Please contact us for more information on shipping options and costs.",
-    title: "Do you offer international shipping?",
-    body: "Yes, we offer international shipping to select countries. Please contact us for more information on shipping options and costs.",
+
     img: lottie2,
   },
   {
