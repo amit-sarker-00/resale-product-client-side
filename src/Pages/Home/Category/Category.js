@@ -19,7 +19,7 @@ const Category = () => {
   return (
     <div>
       <div className="my-10 ">
-        <h1 className="text-center font-bold text-xl md:text-3xl ">
+        <h1 className="text-center font-bold text-pink-500 text-xl md:text-3xl ">
           Categories
         </h1>
       </div>

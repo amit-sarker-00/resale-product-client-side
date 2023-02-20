@@ -1,6 +1,8 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Link } from "react-router-dom";
+import PrimaryButton from "../../../components/PrimaryButton";
 
 const LatestSell = () => {
   const { data: latestSell = [] } = useQuery({
@@ -13,7 +15,7 @@ const LatestSell = () => {
   return (
     <div className="my-20">
       <div>
-        <h1 className="text-center my-8 font-bold text-xl md:text-3xl">
+        <h1 className="text-center text-pink-500 my-8 font-bold text-xl md:text-3xl">
           Latest Sell
         </h1>
       </div>
@@ -41,19 +43,20 @@ const LatestSell = () => {
       >
         {latestSell?.map((latest) => (
           <SplideSlide key={latest._id}>
-            <div className="card w-full sm:w-80 mx-auto  bg-base-100 shadow-xl border">
+            <div className=" w-full sm:w-80 mx-auto  bg-base-100  border">
               <figure className="px-4 pt-4">
-                <img
-                  src={latest.image}
-                  alt="bike"
-                  className="rounded-xl w-full h-64"
-                />
+                <img src={latest.image} alt="bike" className=" w-full h-64" />
               </figure>
-              <div className="card-body">
+              <div className="mx-4 my-2">
                 <h2 className="card-title">{latest.name}</h2>
-                <p>
-                  <strong>Resale Price: ${latest.price}</strong>
+                <p className="mt-1 font-semibold">
+                  Resale Price: ${latest.price}
                 </p>
+              </div>
+              <div className="mx-auto mb-0">
+                <PrimaryButton>
+                  <Link>More Info</Link>
+                </PrimaryButton>
               </div>
             </div>
           </SplideSlide>
