@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000); // replace this with your actual data fetching code
+    }, 4000); // replace this with your actual data fetching code
   }, []);
 
   if (loading) {

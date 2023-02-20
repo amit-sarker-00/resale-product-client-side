@@ -6,7 +6,7 @@ const Cards = () => {
   const { data: recent = [] } = useQuery({
     queryKey: ["recents"],
     queryFn: () =>
-      fetch("http://localhost:5000/recent")
+      fetch("https://resale-server-side.vercel.app/recent")
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
