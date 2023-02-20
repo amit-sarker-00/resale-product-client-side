@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import PrimaryButton from "../../../components/PrimaryButton";
+import { FaStar } from "react-icons/fa";
 const Category = () => {
   useEffect(() => {
     AOS.init();
@@ -26,26 +27,31 @@ const Category = () => {
         data-aos="fade-up"
         data-aos-offset="300"
         data-aos-duration="700"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 "
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 "
       >
         {categories?.map((category) => (
           <div
-            key={category._id}
-            className="card w-full sm:w-80  bg-base-100 shadow-xl border mx-auto"
+            key={category?._id}
+            className=" w-full sm:w-80  bg-base-100  border mx-auto"
           >
             <figure className="px-4 pt-4">
-              <img
-                src={category.image}
-                alt="bike"
-                className="rounded-xl w-full h-64"
-              />
+              <img src={category?.image} alt="bike" className=" w-full h-64" />
             </figure>
-            <div className="card-body mx-auto">
-              <h2 className="card-title">{category.categoryName}</h2>
+            <div className="my-2 mx-4">
+              <h2 className="card-title">{category?.categoryName}</h2>
+              <div className="flex items-center justify-between mt-2">
+                <p className="flex items-center gap-1">
+                  Rating : {category?.rating}{" "}
+                  <span>
+                    <FaStar></FaStar>{" "}
+                  </span>
+                </p>
+                <p>Reviews({category?.reviews})</p>
+              </div>
             </div>
-            <div className="mx-auto mb-2">
+            <div className="mx-auto mb-0">
               <PrimaryButton>
-                <Link to={`/showall/${category._id}`}>View All</Link>
+                <Link to={`/showall/${category?._id}`}>View All</Link>
               </PrimaryButton>
             </div>
           </div>

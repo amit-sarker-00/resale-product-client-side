@@ -42,7 +42,11 @@ const Slider = () => {
       {sliderImg?.map((slider) => (
         <SplideSlide key={slider.id}>
           <div className="slide">
-            <img className="w-full rounded-md" src={slider.image} alt="" />
+            <img
+              className="w-full rounded-md object-cover"
+              src={slider.image}
+              alt=""
+            />
           </div>
         </SplideSlide>
       ))}

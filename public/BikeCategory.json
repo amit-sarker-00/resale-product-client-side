@@ -1,0 +1,50 @@
+[
+  {
+    "categoryName": "Kids' bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/mhM8T0q/PHGAL-00000349-PHOTO-00000270.jpg",
+    "original": "1400",
+    "rating": 4.6,
+    "reviews": 66
+  },
+  {
+    "categoryName": "Touring bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/p1Qk5S2/images.jpg",
+    "original": "1500",
+    "rating": 4.7,
+    "reviews": 86
+  },
+  {
+    "categoryName": "Cruiser bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/HgmX0F7/images-1.jpg",
+    "original": "1600",
+    "rating": 4.5,
+    "reviews": 72
+  },
+  {
+    "categoryName": "Naked bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/k2nkNXp/top-5-performance-nakeds-720x540.jpg",
+    "original": "2400",
+    "rating": 4.8,
+    "reviews": 98
+  },
+  {
+    "categoryName": "Adventure bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/gP1BBrG/7-2022-Ducati-Multistrada-V2.jpg",
+    "original": "1000",
+    "rating": 4.7,
+    "reviews": 56
+  },
+  {
+    "categoryName": "Electric bikes",
+    "resale": "1000",
+    "image": "https://i.ibb.co/0p7gBP7/arc-vector-goodwood-festival-of-speed-2.jpg",
+    "original": "1200",
+    "rating": 4.6,
+    "reviews": 70
+  }
+]
