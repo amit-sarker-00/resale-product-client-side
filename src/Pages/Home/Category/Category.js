@@ -44,13 +44,13 @@ const Category = () => {
                   key={category?._id}
                   className=" lg:w-36 sm:w-20 md:w-28 sm:h-20 md:h-28 lg:h-36  bg-base-100  border mx-auto"
                 >
-                  <div>
+                  <Link to={`/showall/${category?._id}`}>
                     <img
                       src={category?.image}
                       alt="bike"
                       className="w-full h-full  object-cover text-center"
                     />
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

@@ -29,13 +29,6 @@ const LatestSell = () => {
                   className=" p-3 w-full object-cover h-20 sm:h-36"
                 />
               </div>
-              {/* <div className="mx-4 my-2">
-                <h2 className="text-md font-bold">{latest.name}</h2>
-                <p className="mt-1 font-semibold">
-                  Resale Price: ${latest.price}
-                </p>
-              </div>
-              */}
             </div>
           </div>
         ))}
