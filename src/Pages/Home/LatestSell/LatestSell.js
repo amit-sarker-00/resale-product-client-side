@@ -1,4 +1,3 @@
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -13,55 +12,34 @@ const LatestSell = () => {
         .catch((err) => console.error(err)),
   });
   return (
-    <div className="my-20">
+    <div className="my-10">
       <div>
         <h1 className="text-center text-pink-500 my-8 font-bold text-xl md:text-3xl">
           Latest Sell
         </h1>
       </div>
-      <Splide
-        aria-label=""
-        options={{
-          speed: "3000",
-          autoplay: true,
-          rewind: true,
-          perPage: 4,
-          breakpoints: {
-            1280: {
-              perPage: 3,
-            },
-            1024: {
-              perPage: 2,
-            },
-            640: {
-              perPage: 1,
-            },
-          },
-          arrows: false,
-          pagination: false,
-        }}
-      >
-        {latestSell?.map((latest) => (
-          <SplideSlide key={latest._id}>
-            <div className=" w-full sm:w-80 mx-auto  bg-base-100  border">
-              <figure className="px-4 pt-4">
-                <img src={latest.image} alt="bike" className=" w-full h-64" />
-              </figure>
-              <div className="mx-4 my-2">
-                <h2 className="card-title">{latest.name}</h2>
+      <div className="grid grid-cols-5 gap-1">
+        {latestSell?.slice(-5).map((latest) => (
+          <div key={latest._id}>
+            <div className=" w-20 sm:w-32 md:w-40 lg:w-52 mb-2 mx-auto  bg-base-100  border">
+              <div className="">
+                <img
+                  src={latest.image}
+                  alt="bike"
+                  className=" p-3 w-full object-cover h-20 sm:h-36"
+                />
+              </div>
+              {/* <div className="mx-4 my-2">
+                <h2 className="text-md font-bold">{latest.name}</h2>
                 <p className="mt-1 font-semibold">
                   Resale Price: ${latest.price}
                 </p>
               </div>
-              <div className="mx-auto mb-0">
-                <PrimaryButton>
-                  <Link>More Info</Link>
-                </PrimaryButton>
-              </div>
+              */}
             </div>
-          </SplideSlide>
+          </div>
         ))}
-      </Splide>
+      </div>
     </div>
   );
 };

@@ -1,56 +1,56 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-import img1 from "../../../assets/img1.jpg";
-import img2 from "../../../assets/img2.jpg";
-import img3 from "../../../assets/img3.jpg";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, EffectCoverflow } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 const Slider = () => {
-  const sliderImg = [
-    {
-      id: 1,
-      image: img2,
-    },
-    {
-      id: 2,
-      image: img1,
-    },
-    {
-      id: 3,
-      image: img3,
-    },
-  ];
+  const { data: banner = [] } = useQuery({
+    queryKey: ["bannerItem"],
+    queryFn: () =>
+      fetch("https://resale-server-side.vercel.app/banner")
+        .then((res) => res.json())
+        .catch((err) => console.error(err)),
+  });
+  console.log(banner);
   return (
-    <Splide
-      aria-label=""
-      options={{
-        autoplay: true,
-        height: "80vh",
-        breakpoints: {
-          1280: {
-            height: "50vh",
-          },
-          1024: {
-            height: "30vh",
-          },
-        },
-        rewind: true,
-        arrows: false,
-        pagination: false,
-        speed: "2000",
-      }}
-    >
-      {sliderImg?.map((slider) => (
-        <SplideSlide key={slider.id}>
-          <div className="slide">
-            <img
-              className="w-full rounded-md object-cover"
-              src={slider.image}
-              alt=""
-            />
-          </div>
-        </SplideSlide>
-      ))}
-    </Splide>
+    <div className="bg-blue-50">
+      <Swiper
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Autoplay]}
+        className="mySwiper"
+      >
+        {banner?.slice(-5)?.map((item, i) => (
+          <SwiperSlide key={i}>
+            <div className="grid items-center grid-cols-1 sm:grid-cols-2 gap-1">
+              <div className="text-center ">
+                <h1 className="text-xl font-bold md:text:3xl lg:text-5xl ">
+                  {item?.categoryName}
+                </h1>
+                <div className="font-bold mt-4">
+                  <p className="line-through">
+                    Original Price: ${item?.original}
+                  </p>
+                  <p className="text-red-500">Resale Price : ${item?.resale}</p>
+                </div>
+              </div>
+              <div className="h-60 md:h-96">
+                <img
+                  src={item?.image}
+                  alt=""
+                  className="sm:py-4 h-60 md:h-96 object-cover"
+                />
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
