@@ -40,7 +40,7 @@ const PaymentForm = ({ order }) => {
       setCardError(confirmError.message);
       return;
     }
-    console.log(paymentIntent);
+    // console.log(paymentIntent);
   };
   return (
     <div>

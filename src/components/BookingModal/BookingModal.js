@@ -34,7 +34,6 @@ const BookingModal = ({ modalData }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         toast.success("booking successfully done!");
         navigate("/dashboard/myorders");
       });

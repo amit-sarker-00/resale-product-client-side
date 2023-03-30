@@ -10,12 +10,11 @@ const Cards = () => {
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
-  console.log(recent);
   const stickyTopSpace = 50;
   return (
     <div className="py-10 ">
       <div className="my-10 ">
-        <h1 className="text-center font-bold text-pink-500 text-xl md:text-3xl ">
+        <h1 className="text-center font-bold text-pink-500 text-base md:text-3xl ">
           Recent Added
         </h1>
       </div>

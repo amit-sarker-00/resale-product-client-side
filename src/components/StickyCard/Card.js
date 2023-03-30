@@ -3,7 +3,6 @@ import React from "react";
 
 const Card = ({ card, stickyTopSpace }) => {
   const { categoryName, original, resale, image, price } = card;
-  console.log(card);
 
   return (
     <div
@@ -16,8 +15,12 @@ const Card = ({ card, stickyTopSpace }) => {
             {categoryName}
           </h2>
           <div className="flex items-center justify-between font-semibold">
-            <p className="lg:w-3/4 text-lg">Original Price : {original}</p>
-            <p className="lg:w-3/4 text-lg">Resale Price: {resale}</p>
+            <p className="lg:w-3/4 text-base sm:text-lg">
+              Original Price : ${original}
+            </p>
+            <p className="lg:w-3/4 text-base sm:text-lg">
+              Resale Price: ${resale}
+            </p>
           </div>
         </div>
       </div>

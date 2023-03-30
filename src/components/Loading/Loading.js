@@ -3,7 +3,7 @@ import "./Loading.css";
 const Loading = () => {
   return (
     <div className="mx-[50%] my-52">
-      <span class="loader"></span>
+      <span className="loader"></span>
     </div>
   );
 };

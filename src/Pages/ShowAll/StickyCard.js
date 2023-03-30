@@ -3,7 +3,7 @@ import React from "react";
 
 const StickyCard = ({ StickyCard, stickyTopSpace }) => {
   const { categoryName, original, resale, image } = StickyCard;
-  console.log(StickyCard);
+  // console.log(StickyCard);
 
   return (
     <div
@@ -16,8 +16,13 @@ const StickyCard = ({ StickyCard, stickyTopSpace }) => {
             {categoryName}
           </h2>
           <div className="flex items-center justify-between font-semibold">
-            <p className="lg:w-3/4 text-lg">Original Price : {original}</p>
-            <p className="lg:w-3/4 text-lg">Resale Price: {resale}</p>
+            <p className="lg:w-3/4 text-lg">Original Price : ${original}</p>
+            <p className="lg:w-3/4 text-lg">Resale Price: ${resale}</p>
+          </div>
+          <div className="text-center">
+            <button className="bg-pink-500 text-white p-1 font-bold rounded-sm">
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

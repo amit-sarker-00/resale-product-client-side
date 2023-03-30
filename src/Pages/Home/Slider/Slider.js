@@ -13,7 +13,6 @@ const Slider = () => {
         .then((res) => res.json())
         .catch((err) => console.error(err)),
   });
-  console.log(banner);
   return (
     <div className="bg-blue-50">
       <Swiper
